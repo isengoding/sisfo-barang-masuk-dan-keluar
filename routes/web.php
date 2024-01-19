@@ -20,16 +20,22 @@ Route::get('/', function () {
 });
 
 Route::get('/combo', function () {
-    return view('pages.combo');
+    return view('layouts.app');
 });
 Route::get('/guest', function () {
     return view('layouts.guest');
 });
 
-Route::get('/products', [ProductController::class, 'index']);
+// Route::get('/products', [ProductController::class, 'index']);
+// Route::get('/products', [ProductController::class, 'index']);
 
 Route::post('/upload', [ImageController::class, 'upload'])->name('image.upload');
 
 
-Route::resource('images', ImageController::class);
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('images', ImageController::class);
+    Route::resource('products', ProductController::class);
+});
 
