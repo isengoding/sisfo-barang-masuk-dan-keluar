@@ -194,36 +194,36 @@
     <script>
         $(function() {
 
-            // First register any plugins
             FilePond.registerPlugin(
                 FilePondPluginFileValidateType,
                 FilePondPluginImagePreview,
                 FilePondPluginFileValidateSize
             );
 
-            // Turn input element into a pond
-            $("#image").filepond({
-                allowImagePreview: true,
-                allowImageFilter: true,
-                allowFileSizeValidation: true,
-                maxFileSize: '5MB',
-                imagePreviewHeight: 200,
-                allowMultiple: false,
-                allowFileTypeValidation: true,
-                allowRevert: true,
-                acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg"],
-                maxFiles: 5,
-                credits: false,
+            FilePond.setOptions({
                 server: {
+                    process: (fieldName, file, metadata, load, error, progress, abort, transfer,
+                        options) => {
+                        abort();
+                    }
+                }
+            })
+
+            // Turn input element into a pond
+            const inputElement = document.querySelector('#image');
+            const pond = FilePond.create(inputElement, {
+                allowFileTypeValidation: true,
+                maxFileSize: '3MB',
+                allowImagePreview: true,
+                allowFileSizeValidation: true,
+                acceptedFileTypes: ['image/*'],
+                server: {
+                    process: '{{ route('images.upload') }}',
+                    revert: '{{ route('images.revert') }}',
                     headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
-                    url: "{{ config('filepond.server.url') }}",
-                    process: true,
-                    revert: "{{ config('filepond.server.url') }}",
-                    restore: "{{ config('filepond.server.url') }}",
-                    fetch: false,
-                },
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }
             });
 
 

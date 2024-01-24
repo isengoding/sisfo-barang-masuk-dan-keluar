@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -34,13 +35,19 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            //code...
-        } catch (\Throwable $th) {
-            //throw $th;
+        if (!empty($request->input('path'))) {
+            try {
+                $newFilename = Str::after($request->input('path'), 'tmp/');
+                Storage::disk('public')->move($request->input('path'), "images/$newFilename");
+                Image::create(['path' => "images/$newFilename"]);
+                return redirect()->route('images.create')->withSuccess('File uploaded successfully');
+            } catch (\Throwable $th) {
+                return redirect()->back()->withError('An error occurred: ' . $th->getMessage());
+            }
         }
 
-        return redirect()->route('images.index');
+        return redirect()->back()->withSuccess('No file Uploaded');
+
 
     }
 
@@ -65,31 +72,39 @@ class ImageController extends Controller
      */
     public function update(Request $request, Image $image)
     {
-        // avatars/1705496289-3853945913.jpg.jpg
-        // 1705462394.image.jpeg
-        // dd(Storage::exists('public/' . $image->path));
+        $request->validate([
+            // 'path' => 'max:1024|nullable',
+            // 'image' => Rule::filepond([
+            //     'max:5000',
+            //     'image',
+            //     'nullable'
+            // ])
+        ]);
+
         try {
-            if ($request->file) {
-
-                if (Storage::exists('public/' . $image->path)) {
-                    Storage::delete('public/' . $image->path);
+            \DB::beginTransaction();
+            if (!empty($request->input('path'))) {
+                if (Str::afterLast($request->input('path'), '/') !== Str::afterLast($image->path, '/')) {
+                    Storage::disk('public')->delete($image->path);
+                    $newFilename = Str::after($request->input('path'), 'tmp/');
+                    Storage::disk('public')->move($request->input('path'), "images/$newFilename");
                 }
-                $avatarName = time() . '-' . Filepond::field($request->file)->getFile()->getClientOriginalName();
 
-                $fileInfo = Filepond::field($request->file)
-                    ->moveTo('avatars/' . $avatarName);
-                // dd($fileInfo);
+                $image->update([
+                    'path' => isset($newFilename) ? "images/$newFilename" : $image->path
+                ]);
 
-                $image->update(['path' => $fileInfo['location']]);
-                return back()->withSuccess('File uploaded successfully');
-            } else {
-
-                return back()->withErrors(['file' => 'Failed to upload file']);
+                \DB::commit();
             }
-        } catch (\Exception $e) {
-            // Handle any exceptions during file processing
-            return back()->withErrors(['file' => 'Error processing the file: ' . $e->getMessage()]);
+
+            return redirect()->back()->withSuccess('File update successfully');
+
+        } catch (\Throwable $th) {
+            \DB::rollBack();
+            return redirect()->back()->withError('An error occurred: ' . $th->getMessage());
         }
+
+
     }
 
     /**
@@ -104,73 +119,28 @@ class ImageController extends Controller
         return back()->withSuccess('File deleted successfully');
     }
 
+    public function revert(Request $request)
+    {
+        Storage::disk('public')->delete($request->getContent());
+    }
+
     public function upload(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'file' => Rule::filepond([
-        //         'required',
-        //     ])
-        // ]);
-        // dd($request->file('file'));
-        // if ($request->hasFile('file')) {
-        //     dd('taek ada filenya');
-        //     $files = $request->file('file');
-        //     $path = $files->storePublicly('files', 'public');
+        $request->validate([
+            'image' => 'max:3000|nullable',
+            // 'image' => Rule::filepond([
+            //     'max:5000',
+            //     'image',
+            //     'nullable'
+            // ])
+        ]);
 
-        //     // dd($files);
-        //     // foreach ($files as $key => $file) {
-        //     //     $filename = $file->getClientOriginalName();
-        //     //     $folder = uniqid() . '-' . time();
-        //     //     // $file->storeAs('orders/temp/' . $folder, $filename);
-        //     //     // Image::query()->create(['folder' => $folder, 'filename' => $filename]);
-        //     //     // Arr::add($folders, $key, $folder);
-        //     // }
-        //     return response()->json(['status' => 'ok'], 200);
-        // }
-
-        // $this->validate($request, [
-        //     // 'file' => Rule::filepond([
-        //     //     'required',
-        //     //     'image',
-        //     //     // 'max:2000'
-        //     // ]),
-        //     'file' => Rule::filepond([
-        //         'required',
-        //         'image',
-        //         // 'max:2000'
-        //     ]),
-
-        // ]);
-        try {
-            if ($request->file) {
-
-                $avatarName = time() . '-' . Filepond::field($request->file)->getFile()->getClientOriginalName();
-
-                $fileInfo = Filepond::field($request->file)
-                    ->moveTo('avatars/' . $avatarName);
-                // dd($fileInfo);
-
-                Image::create(['path' => $fileInfo['location']]);
-                return back()->withSuccess('File uploaded successfully');
-            } else {
-
-                return back()->withErrors(['file' => 'Empty']);
-            }
-        } catch (\Exception $e) {
-            // Handle any exceptions during file processing
-            return back()->withErrors(['file' => 'Error processing the file: ' . $e->getMessage()]);
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $originalName = $file->getClientOriginalName();
+            $path = $file->storeAs('tmp', time() . '-' . $originalName, 'public');
         }
-        // dd(Filepond::field($request->file)->filename);
-        // $files = $request->file;
-        // // $avatarName = time() . '.' . 'image';
-        // $avatarName = time() . '-' . Filepond::field($request->file)->getFile()->getClientOriginalName();
-        // // dd($avatarName);
-        // $fileInfo = Filepond::field($request->file)
-        //     ->moveTo('avatars/' . $avatarName);
-        // // dd($fileInfo);
+        return $path;
 
-        // Image::create(['path' => $fileInfo['location']]);
-
-        // return redirect()->back();
     }
 }

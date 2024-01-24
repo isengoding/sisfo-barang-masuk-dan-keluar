@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Product;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,13 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $filter['search'] = request()->keyword;
+
+        $products = Product::query()
+            ->filter($filter)
+            ->latest()
+            ->paginate(10);
+
         return view('products.index', compact('products'));
     }
 
@@ -33,10 +40,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'stock' => 'required|numeric',
             'description' => 'nullable',
-            'image' => Rule::filepond([
-                'max:5000',
-                'image'
-            ])
+
         ]);
 
         $data = $request->except('image');
@@ -44,10 +48,10 @@ class ProductController extends Controller
         try {
             \DB::beginTransaction();
 
-            if (Filepond::field($request->image)->getFile()) {
-                $fileName = time() . '-' . Filepond::field($request->image)->getFile()->getClientOriginalName();
-                $fileInfo = Filepond::field($request->image)->moveTo('avatars/' . $fileName);
-                $data['image'] = $fileInfo['location'];
+            if (!empty($request->input('image'))) {
+                $newFilename = Str::after($request->input('image'), 'tmp/');
+                Storage::disk('public')->move($request->input('image'), "avatars/$newFilename");
+                $data['image'] = "avatars/$newFilename";
             }
 
             Product::create($data);
@@ -56,10 +60,10 @@ class ProductController extends Controller
             return back()->withSuccess('Product created successfully');
         } catch (\Exception $e) {
             \DB::rollBack();
+            // if (Storage::exists('public/' . $data['image'])) {
+            //     Storage::delete('public/' . $data['image']);
+            // }
 
-            if (Storage::exists('public/' . $data['image'])) {
-                Storage::delete('public/' . $data['image']);
-            }
 
             return back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -82,22 +86,21 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'stock' => 'required|numeric',
             'description' => 'nullable',
-            'image' => Rule::filepond([
-                'max:5000',
-                'image'
-            ])
+
         ]);
 
         $data = $request->except('image');
         try {
             \DB::beginTransaction();
-            if (Filepond::field($request->image)->getFile()) {
-                if (Storage::exists('public/' . $product->image)) {
-                    Storage::delete('public/' . $product->image);
+            if (!empty($request->input('image'))) {
+
+                if (Str::afterLast($request->input('image'), '/') !== Str::afterLast($product->image, '/')) {
+                    $newFilename = Str::after($request->input('image'), 'tmp/');
+                    Storage::disk('public')->delete($product->image);
+                    Storage::disk('public')->move($request->input('image'), "avatars/$newFilename");
+                    $data['image'] = "avatars/$newFilename";
                 }
-                $fileName = time() . '-' . Filepond::field($request->image)->getFile()->getClientOriginalName();
-                $fileInfo = Filepond::field($request->image)->moveTo('avatars/' . $fileName);
-                $data['image'] = $fileInfo['location'];
+
             }
 
             $product->update($data);
@@ -105,9 +108,9 @@ class ProductController extends Controller
             return back()->withSuccess('Product updated successfully');
         } catch (\Exception $e) {
             \DB::rollBack();
-            if (Storage::exists('public/' . $data['image'])) {
-                Storage::delete('public/' . $data['image']);
-            }
+            // if (Storage::exists('public/' . $data['image'])) {
+            //     Storage::delete('public/' . $data['image']);
+            // }
             return back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
 

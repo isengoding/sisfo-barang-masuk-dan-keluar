@@ -94,9 +94,10 @@ return [
     |
     */
     'validation_rules' => [
-        'required',
+        // 'required',
         'file',
         'max:5000',
+        'nullable'
     ],
 
     /*

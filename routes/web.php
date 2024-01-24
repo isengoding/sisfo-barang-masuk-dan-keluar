@@ -29,8 +29,8 @@ Route::get('/guest', function () {
 // Route::get('/products', [ProductController::class, 'index']);
 // Route::get('/products', [ProductController::class, 'index']);
 
-Route::post('/upload', [ImageController::class, 'upload'])->name('image.upload');
-
+Route::post('upload', [ImageController::class, 'upload'])->name('images.upload');
+Route::delete('revert', [ImageController::class, 'revert'])->name('images.revert');
 
 
 

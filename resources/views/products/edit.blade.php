@@ -168,95 +168,40 @@
     <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
 
     <script>
-        // $(function() {
-
-        //     // First register any plugins
-        //     FilePond.registerPlugin(
-        //         FilePondPluginFileValidateType,
-        //         FilePondPluginImagePreview,
-        //         FilePondPluginFileValidateSize
-        //     );
-
-        //     // Turn input element into a pond
-        //     $("#image").filepond({
-        //         allowImagePreview: true,
-        //         allowImageFilter: true,
-        //         allowFileSizeValidation: true,
-        //         maxFileSize: '5MB',
-        //         imagePreviewHeight: 200,
-        //         allowMultiple: false,
-        //         allowFileTypeValidation: true,
-        //         allowRevert: true,
-        //         acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg"],
-        //         maxFiles: 5,
-        //         credits: false,
-        //         server: {
-        //             headers: {
-        //                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        //             },
-        //             url: "{{ config('filepond.server.url') }}",
-        //             process: true,
-        //             revert: "{{ config('filepond.server.url') }}",
-        //             restore: "{{ config('filepond.server.url') }}",
-        //             fetch: false,
-        //         },
-        //     });
-
-
-        // });
-
         $(function() {
-            let path = document.getElementById("path").value;
-            let url = `{{ asset('storage/${path}') }}`;
-
-            // First register any plugins
             FilePond.registerPlugin(
                 FilePondPluginFileValidateType,
                 FilePondPluginImagePreview,
                 FilePondPluginFileValidateSize
             );
 
-            // Turn input element into a pond
-            $("#image").filepond({
-                allowImagePreview: true,
-                allowImageFilter: true,
-                allowFileSizeValidation: true,
-                maxFileSize: '5MB',
-                imagePreviewHeight: 200,
-                allowMultiple: false,
+            const inputElement = document.querySelector('#image');
+            const pond = FilePond.create(inputElement, {
+                acceptedFileTypes: ['image/*'],
                 allowFileTypeValidation: true,
-                allowRevert: true,
-                acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg"],
-                maxFiles: 5,
-                credits: false,
+                maxFileSize: '3MB',
+                allowImagePreview: true,
+                allowFileSizeValidation: true,
                 server: {
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
                     load: (source, load, error, progress, abort, headers) => {
-                        // now load it using XMLHttpRequest as a blob then load it.
-                        let request = new XMLHttpRequest();
-                        request.open('GET', source);
-                        request.responseType = "blob";
-                        request.onreadystatechange = () => request.readyState === 4 && load(request
-                            .response);
-                        request.send();
+                        const myRequest = new Request(source);
+                        fetch(myRequest).then((res) => {
+                            return res.blob();
+                        }).then(load);
                     },
-                    url: "{{ config('filepond.server.url') }}",
-                    process: true,
-                    revert: "{{ config('filepond.server.url') }}",
-                    restore: "{{ config('filepond.server.url') }}",
-                    fetch: false,
+                    process: '{{ route('images.upload') }}',
+                    revert: '{{ route('images.revert') }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
                 },
                 files: [{
-                    source: url,
+                    source: '{{ Storage::disk('public')->url($product->image) }}',
                     options: {
-                        type: 'local'
+                        type: 'local',
                     },
                 }],
             });
-
-
 
         });
     </script>

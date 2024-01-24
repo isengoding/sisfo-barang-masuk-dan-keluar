@@ -1041,7 +1041,10 @@
                 <div class="container-xl">
                     <div class="row row-deck row-cards">
 
-
+                        <div class="col-12">
+                            <x-alert-error />
+                            <x-alert-success />
+                        </div>
 
 
                         <div class="col-12">
@@ -1064,16 +1067,16 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row align-items-center">
-                                        <form action="{{ route('image.upload') }}" method="post"
+                                        <form action="{{ route('images.store') }}" method="post"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="col-4">
 
                                                 <div class="mb-3">
                                                     <div class="form-label">Upload Image</div>
-                                                    <input type="file" class="my-pond form-control" name="file"
-                                                        id="file" required />
-                                                    @error('file')
+                                                    <input type="file" class="my-pond form-control" name="path"
+                                                        id="path" required />
+                                                    @error('path')
                                                         <div class="text-danger small mt-1">{{ $message }}</div>
                                                     @enderror
 
@@ -1092,52 +1095,7 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer footer-transparent d-print-none">
-                <div class="container-xl">
-                    <div class="row text-center align-items-center flex-row-reverse">
-                        <div class="col-lg-auto ms-lg-auto">
-                            <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank"
-                                        class="link-secondary" rel="noopener">Documentation</a></li>
-                                <li class="list-inline-item"><a href="./license.html"
-                                        class="link-secondary">License</a></li>
-                                <li class="list-inline-item"><a href="https://github.com/tabler/tabler"
-                                        target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
-                                <li class="list-inline-item">
-                                    <a href="https://github.com/sponsors/codecalm" target="_blank"
-                                        class="link-secondary" rel="noopener">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon text-pink icon-filled icon-inline" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path
-                                                d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                                        </svg>
-                                        Sponsor
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                            <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item">
-                                    Copyright &copy; 2023
-                                    <a href="." class="link-secondary">Tabler</a>.
-                                    All rights reserved.
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                                        v1.0.0-beta20
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+
         </div>
     </div>
 
@@ -1179,80 +1137,34 @@
                 FilePondPluginFileValidateSize
             );
 
-            // Turn input element into a pond
-            // $('.my-pond').filepond();
-            $(".my-pond").filepond({
-                allowImagePreview: true,
-                allowImageFilter: true,
-                allowFileSizeValidation: true,
-                maxFileSize: '5MB',
-                imagePreviewHeight: 500,
-                allowMultiple: false,
-                allowFileTypeValidation: true,
-                allowRevert: true,
-                acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg"],
-                maxFiles: 5,
-                credits: false,
+            FilePond.setOptions({
                 server: {
+                    process: (fieldName, file, metadata, load, error, progress, abort, transfer,
+                        options) => {
+                        abort();
+                    }
+                }
+            })
+
+            // Turn input element into a pond
+            const inputElement = document.querySelector('#path');
+            const pond = FilePond.create(inputElement, {
+                allowFileTypeValidation: true,
+                maxFileSize: '3MB',
+                allowImagePreview: true,
+                allowFileSizeValidation: true,
+                acceptedFileTypes: ['image/*'],
+                server: {
+                    process: '{{ route('images.upload') }}',
+                    revert: '{{ route('images.revert') }}',
                     headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
-                    url: "{{ config('filepond.server.url') }}",
-                    process: true,
-                    revert: "{{ config('filepond.server.url') }}",
-                    restore: "{{ config('filepond.server.url') }}",
-                    fetch: false,
-                },
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }
             });
 
-            // this is the url of image.
-            // let url = `{{ asset('storage/avatars/1705462394.image.jpeg') }}`;
 
-            // FilePond.setOptions({
-            //     allowImageValidateSize: true,
-            //     allowFileSizeValidation: true,
-            //     maxFileSize: '1MB',
-            //     server: {
-            //         url: "{{ config('filepond.server.url') }}",
-            //         headers: {
-            //             'X-CSRF-TOKEN': "{{ @csrf_token() }}",
-            //         },
-            //         load: (source, load, error, progress, abort, headers) => {
-            //             // now load it using XMLHttpRequest as a blob then load it.
-            //             let request = new XMLHttpRequest();
-            //             request.open('GET', source);
-            //             request.responseType = "blob";
-            //             request.onreadystatechange = () => request.readyState === 4 && load(request
-            //                 .response);
-            //             request.send();
-            //         },
-            //     }
-            // });
 
-            // // don't forget to set options local to tell filepond this is already uploaded
-            // // parameter sourse ask for url.
-            // FilePond.create(document.querySelector('#file'), {
-            //     acceptedFileTypes: ['image/png', 'image/jpeg'],
-            //     // files: [{
-            //     //     source: url,
-            //     //     // options: {
-            //     //     //     type: 'local'
-            //     //     // },
-            //     // }],
-            // });
-
-            // Set allowMultiple property to true
-            // $('.my-pond').filepond('allowMultiple', true);
-
-            // Listen for addfile event
-            // $('.my-pond').on('FilePond:addfile', function(e) {
-            //     console.log('file added event', e);
-            // });
-
-            // Manually add a file using the addfile method
-            // $('.my-pond').first().filepond('addFile', 'index.html').then(function(file) {
-            //     console.log('file added', file);
-            // });
 
         });
     </script>

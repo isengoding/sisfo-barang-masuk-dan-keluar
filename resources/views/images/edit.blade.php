@@ -1043,7 +1043,10 @@
 
 
 
-
+                        <div class="col-12">
+                            <x-alert-success />
+                            <x-alert-error />
+                        </div>
                         <div class="col-12">
                             <div class="card card-md">
                                 <div class="card-stamp card-stamp-lg">
@@ -1071,24 +1074,15 @@
                                             <div class="col-10">
 
                                                 <div class="mb-3">
-                                                    <div class="form-label">Select Product</div>
-                                                    <input type="file" class="my-pond form-control" name="file"
-                                                        id="file" required />
-                                                    @error('file')
+                                                    <div class="form-label">Update Image</div>
+                                                    <input type="file" class="my-pond form-control" name="path"
+                                                        id="path" required />
+                                                    @error('path')
                                                         <div class="text-danger small mt-1">{{ $message }}</div>
                                                     @enderror
 
                                                 </div>
-                                                <div class="mb-3">
-                                                    <div class="form-label">Select Product</div>
-                                                    <input type="text" class="form-control" name="path"
-                                                        id="path" value="{{ $image->path }}" />
-                                                    @error('text')
-                                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                                    @enderror
-
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Upload</button>
+                                                <button type="submit" class="btn btn-primary">Update</button>
                                             </div>
 
                                             {{-- <input type="text" value="{{ $image->path }}"> --}}
@@ -1181,106 +1175,39 @@
 
     <script>
         $(function() {
-            let path = document.getElementById("path").value;
-            let url = `{{ asset('storage/${path}') }}`;
-            console.log(url)
-            // First register any plugins
-            // $.fn.filepond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(
                 FilePondPluginFileValidateType,
                 FilePondPluginImagePreview,
                 FilePondPluginFileValidateSize
             );
 
-            // Turn input element into a pond
-            // $('.my-pond').filepond();
-            $(".my-pond").filepond({
-                allowImagePreview: true,
-                allowImageFilter: true,
-                allowFileSizeValidation: true,
-                maxFileSize: '5MB',
-                imagePreviewHeight: 200,
-                allowMultiple: false,
+            const inputElement = document.querySelector('#path');
+            const pond = FilePond.create(inputElement, {
+                acceptedFileTypes: ['image/*'],
                 allowFileTypeValidation: true,
-                allowRevert: true,
-                acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg"],
-                maxFiles: 5,
-                credits: false,
+                maxFileSize: '3MB',
+                allowImagePreview: true,
+                allowFileSizeValidation: true,
                 server: {
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
                     load: (source, load, error, progress, abort, headers) => {
-                        // now load it using XMLHttpRequest as a blob then load it.
-                        let request = new XMLHttpRequest();
-                        request.open('GET', source);
-                        request.responseType = "blob";
-                        request.onreadystatechange = () => request.readyState === 4 && load(request
-                            .response);
-                        request.send();
+                        const myRequest = new Request(source);
+                        fetch(myRequest).then((res) => {
+                            return res.blob();
+                        }).then(load);
                     },
-                    url: "{{ config('filepond.server.url') }}",
-                    process: true,
-                    revert: "{{ config('filepond.server.url') }}",
-                    restore: "{{ config('filepond.server.url') }}",
-                    fetch: false,
+                    process: '{{ route('images.upload') }}',
+                    revert: '{{ route('images.revert') }}',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
                 },
                 files: [{
-                    source: url,
+                    source: '{{ Storage::disk('public')->url($image->path) }}',
                     options: {
-                        type: 'local'
+                        type: 'local',
                     },
                 }],
             });
-
-            // this is the url of image.
-
-
-            // FilePond.setOptions({
-            //     allowImageValidateSize: true,
-            //     allowFileSizeValidation: true,
-            //     maxFileSize: '1MB',
-            //     server: {
-            //         url: "{{ config('filepond.server.url') }}",
-            //         headers: {
-            //             'X-CSRF-TOKEN': "{{ @csrf_token() }}",
-            //         },
-            //         load: (source, load, error, progress, abort, headers) => {
-            //             // now load it using XMLHttpRequest as a blob then load it.
-            //             let request = new XMLHttpRequest();
-            //             request.open('GET', source);
-            //             request.responseType = "blob";
-            //             request.onreadystatechange = () => request.readyState === 4 && load(request
-            //                 .response);
-            //             request.send();
-            //         },
-            //     }
-            // });
-
-            // // don't forget to set options local to tell filepond this is already uploaded
-            // // parameter sourse ask for url.
-            // FilePond.create(document.querySelector('#file'), {
-            //     acceptedFileTypes: ['image/png', 'image/jpeg'],
-            //     files: [{
-            //         source: url,
-            //         options: {
-            //             type: 'local'
-            //         },
-            //     }],
-            // });
-
-            // Set allowMultiple property to true
-            // $('.my-pond').filepond('allowMultiple', true);
-
-            // Listen for addfile event
-            // $('.my-pond').on('FilePond:addfile', function(e) {
-            //     console.log('file added event', e);
-            // });
-
-            // Manually add a file using the addfile method
-            // $('.my-pond').first().filepond('addFile', 'index.html').then(function(file) {
-            //     console.log('file added', file);
-            // });
 
         });
     </script>

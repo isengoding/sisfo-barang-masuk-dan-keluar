@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->integer('price');
             $table->integer('stock');
             $table->string('image')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

@@ -58,8 +58,20 @@
             <x-alert-success />
             <x-alert-error />
 
+            <div class="row">
+                <div class="col-12 col-lg-3">
+                    <form action="" method="get">
+                        <div class="input-icon mb-3">
+                            <input type="search" value="{{ request()->query('keyword') }}" class="form-control w-100"
+                                name="keyword" placeholder="Search…">
+                            <span class="input-icon-addon">
+                                <i class="icon ti ti-search"></i>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="row row-deck row-cards">
-
                 <div class="col-12">
                     <div class="card">
                         <div class="table-responsive">
@@ -79,7 +91,7 @@
                                     @forelse ($products as $row)
                                         <tr>
                                             <td class="text-secondary align-text-top" data-label="No">
-                                                {{ $loop->iteration }}
+                                                {{ $loop->iteration + $products->firstItem() - 1 }}
                                             </td>
                                             <td data-label="Product">
                                                 <div class="d-flex py-1 align-items-top">
@@ -98,7 +110,7 @@
                                             </td>
 
                                             <td class="align-text-top" data-label="Brand">
-                                                Brand
+                                                {{ $row->brand->name }}
                                             </td>
 
                                             <td class="align-text-top text-start text-lg-center" data-label="Stock">
@@ -131,11 +143,20 @@
                                         </tr>
 
                                     @empty
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                No data found.
+                                            </td>
+                                        </tr>
                                     @endforelse
 
 
                                 </tbody>
                             </table>
+                        </div>
+
+                        <div class="card-footer d-flex justify-content-center align-items-center">
+                            {{ $products->onEachSide(1)->withQueryString()->withPath(request()->fullUrl())->links() }}
                         </div>
                     </div>
                 </div>
