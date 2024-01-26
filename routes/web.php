@@ -36,6 +36,8 @@ Route::delete('revert', [ImageController::class, 'revert'])->name('images.revert
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('images', ImageController::class);
+
+    Route::get('/products/pdf', [ProductController::class, 'pdf'])->name('products.pdf');
     Route::resource('products', ProductController::class);
 });
 

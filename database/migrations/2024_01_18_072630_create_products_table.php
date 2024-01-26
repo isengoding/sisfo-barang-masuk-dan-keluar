@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->foreignId('brand_id')->constrained();
             $table->integer('price');
             $table->integer('stock');
-            $table->string('image')->nullable();
+            $table->string('image')->nullable()->default('avatars/default.png');
             $table->text('description')->nullable();
             $table->timestamps();
         });

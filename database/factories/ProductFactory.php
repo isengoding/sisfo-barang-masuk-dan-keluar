@@ -23,7 +23,7 @@ class ProductFactory extends Factory
             'description' => fake()->sentence(5),
             'price' => fake()->randomNumber(1, 1000),
             'stock' => fake()->numberBetween(1, 1000),
-            // 'image' => fake()->imageUrl(),
+            'image' => "avatars/default.png",
             'brand_id' => Brand::factory(),
 
         ];

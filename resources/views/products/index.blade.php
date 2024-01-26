@@ -22,6 +22,11 @@
                                 New view
                             </a>
                         </span>
+                        <a href="{{ route('products.pdf') }}" target="_blank"
+                            class="btn btn-primary d-none d-sm-inline-block">
+                            <i class="ti ti-file-export icon"></i>
+                            PDF
+                        </a>
                         <a href="{{ route('products.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"

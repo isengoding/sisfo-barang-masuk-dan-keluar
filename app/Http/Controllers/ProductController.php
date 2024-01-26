@@ -6,9 +6,9 @@ use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
-use RahulHaque\Filepond\Facades\Filepond;
 
 class ProductController extends Controller
 {
@@ -96,7 +96,9 @@ class ProductController extends Controller
 
                 if (Str::afterLast($request->input('image'), '/') !== Str::afterLast($product->image, '/')) {
                     $newFilename = Str::after($request->input('image'), 'tmp/');
-                    Storage::disk('public')->delete($product->image);
+                    if (Storage::exists('public/' . $product->image) && $product->image !== "avatars/default.png") {
+                        Storage::delete('public/' . $product->image);
+                    }
                     Storage::disk('public')->move($request->input('image'), "avatars/$newFilename");
                     $data['image'] = "avatars/$newFilename";
                 }
@@ -118,11 +120,25 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        if (Storage::exists('public/' . $product->image)) {
+        if (Storage::exists('public/' . $product->image) && $product->image !== "avatars/default.png") {
             Storage::delete('public/' . $product->image);
         }
 
         $product->delete();
         return back()->withSuccess('Data deleted successfully');
+    }
+
+    public function pdf()
+    {
+
+        $pdf = Pdf::setOptions([
+            'dpi' => 100,
+            // 'defaultFont' => 'sans-serif',
+        ])
+            ->loadView('products.pdf', [
+                'products' => Product::all(),
+            ]);
+
+        return $pdf->stream();
     }
 }

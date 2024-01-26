@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -53,6 +54,26 @@ class Product extends Model
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    protected function imageBase64(): Attribute
+    {
+        $imagePath = public_path('storage/' . $this->image);
+        return Attribute::make(
+            get: fn() => base64_encode(file_get_contents($imagePath)),
+        );
+    }
+
+    /**
+     * Get the base64 encoded image.
+     *
+     * @return string
+     */
+    public function getImageBaseAttribute(): string
+    {
+        // $imagePath = storage_path('app/public/' . $this->image);
+        $imagePath = public_path('storage/' . $this->image);
+        return base64_encode(file_get_contents($imagePath));
     }
 
 

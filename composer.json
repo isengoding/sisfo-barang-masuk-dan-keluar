@@ -6,12 +6,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "barryvdh/laravel-dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/fortify": "^1.20",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "rahulhaque/laravel-filepond": "10"
+        "rahulhaque/laravel-filepond": "10",
+        "spatie/laravel-pdf": "^1.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
