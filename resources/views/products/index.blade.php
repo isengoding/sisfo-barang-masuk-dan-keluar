@@ -27,6 +27,11 @@
                             <i class="ti ti-file-export icon"></i>
                             PDF
                         </a>
+                        <a href="{{ route('products.excel') }}" target="_blank"
+                            class="btn btn-primary d-none d-sm-inline-block">
+                            <i class="ti ti-table-export icon"></i>
+                            Excel
+                        </a>
                         <a href="{{ route('products.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -133,7 +138,8 @@
                                                     <i class="ti ti-dots icon"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end" style="">
-                                                    <a class="dropdown-item" href="{{ route('products.edit', $row->id) }}">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('products.edit', $row->id) }}">
                                                         <i class="ti ti-edit icon text-secondary me-2"></i>
                                                         Edit
                                                     </a>

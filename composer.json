@@ -12,6 +12,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "maatwebsite/excel": "^3.1",
         "rahulhaque/laravel-filepond": "10",
         "spatie/laravel-pdf": "^1.1"
     },

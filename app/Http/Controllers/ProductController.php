@@ -6,8 +6,10 @@ use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Exports\ProductsExport;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -140,5 +142,15 @@ class ProductController extends Controller
             ]);
 
         return $pdf->stream();
+    }
+
+    public function excel()
+    {
+
+        $data = Product::query()
+            ->with('brand')
+            ->get();
+
+        return Excel::download(new ProductsExport($data), 'data-product.xls');
     }
 }
