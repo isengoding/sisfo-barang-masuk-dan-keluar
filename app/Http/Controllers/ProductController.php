@@ -60,7 +60,7 @@ class ProductController extends Controller
             Product::create($data);
             \DB::commit();
 
-            return back()->withSuccess('Product created successfully');
+            return redirect(route('products.index'))->withSuccess('Product created successfully');
         } catch (\Exception $e) {
             \DB::rollBack();
             // if (Storage::exists('public/' . $data['image'])) {
@@ -128,7 +128,7 @@ class ProductController extends Controller
         }
 
         $product->delete();
-        return back()->withSuccess('Data deleted successfully');
+        return redirect(route('products.index'))->withSuccess('Data deleted successfully');
     }
 
     public function pdf()
@@ -142,7 +142,7 @@ class ProductController extends Controller
                 'products' => Product::all(),
             ]);
 
-        return $pdf->stream();
+        return $pdf->download('laporan-produk.pdf');
     }
 
     public function excel()
@@ -184,4 +184,7 @@ class ProductController extends Controller
 
         }
     }
+
+
+
 }
