@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ProductsImport;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Support\Str;
@@ -152,5 +153,35 @@ class ProductController extends Controller
             ->get();
 
         return Excel::download(new ProductsExport($data), 'data-product.xls');
+    }
+
+    public function importCreate()
+    {
+        return view('products.import');
+    }
+
+    public function importStore(Request $request)
+    {
+
+        // dd($request->file('file'));
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        try {
+            $import = new ProductsImport;
+            Excel::import($import, $request->file);
+            // dd($import->getRowCount());
+            return redirect()
+                ->route('products.import.create')
+                ->withSuccess("Total data imported: " . $import->getRowCount());
+
+        } catch (\Throwable $e) {
+
+            return redirect()
+                ->route('products.import.create')
+                ->withError("Data Failed to import. ERROR MESSAGE: " . $e->getMessage());
+
+        }
     }
 }

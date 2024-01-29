@@ -22,6 +22,10 @@
                                 New view
                             </a>
                         </span>
+                        <a href="{{ route('products.import.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                            <i class="ti ti-table-import icon"></i>
+                            Import
+                        </a>
                         <a href="{{ route('products.pdf') }}" target="_blank"
                             class="btn btn-primary d-none d-sm-inline-block">
                             <i class="ti ti-file-export icon"></i>
