@@ -15,9 +15,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/combo', function () {
     return view('layouts.app');
@@ -35,6 +33,10 @@ Route::delete('revert', [ImageController::class, 'revert'])->name('images.revert
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
     Route::resource('images', ImageController::class);
 
     Route::get('/products/import/create', [ProductController::class, 'importCreate'])->name('products.import.create');

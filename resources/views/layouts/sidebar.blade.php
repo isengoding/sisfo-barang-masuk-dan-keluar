@@ -65,21 +65,27 @@
                     aria-label="Open user menu">
                     <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
                     <div class="d-none d-xl-block ps-2">
-                        <div>Isengoding</div>
-                        <div class="mt-1 small text-secondary">Admin</div>
+                        <div>{{ auth()->user()->name }}</div>
+                        <div class="mt-1 small text-secondary">{{ auth()->user()->email }}</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="./profile.html" class="dropdown-item">Profile</a>
                     <a href="./settings.html" class="dropdown-item">Settings</a>
-                    <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" class="dropdown-item"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
                 </div>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="./">
+                <li class="nav-item @if (request()->routeIs('dashboard')) active @endif">
+                    <a class="nav-link" href="{{ route('dashboard') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <i class="ti ti-home icon"></i>
                         </span>
@@ -99,7 +105,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item active dropdown">
+                {{-- <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
                         data-bs-auto-close="false" role="button" aria-expanded="false">
                         <span
@@ -144,7 +150,7 @@
                             Sponsor project!
                         </a>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
