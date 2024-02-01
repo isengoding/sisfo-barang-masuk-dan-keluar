@@ -24,7 +24,7 @@
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
-            <div class="row row-deck row-cards">
+            <div class="row row-deck row-cards mb-4">
 
                 <div class="col-12">
                     <div class="row row-cards">
@@ -35,15 +35,8 @@
                                         <div class="col-auto">
                                             <span
                                                 class="bg-primary text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/currency-dollar -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />
-                                                    <path d="M12 3v3m0 12v3" />
-                                                </svg>
+
+                                                <i class="ti ti-stack-2 icon"></i>
                                             </span>
                                         </div>
                                         <div class="col">
@@ -51,7 +44,7 @@
                                                 132
                                             </div>
                                             <div class="text-secondary">
-                                                Products
+                                                Produk
                                             </div>
                                         </div>
                                     </div>
@@ -65,16 +58,8 @@
                                         <div class="col-auto">
                                             <span
                                                 class="bg-green text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                                    <path d="M17 17h-11v-14h-2" />
-                                                    <path d="M6 5l14 1l-1 7h-13" />
-                                                </svg>
+
+                                                <i class="ti ti-transfer-in icon"></i>
                                             </span>
                                         </div>
                                         <div class="col">
@@ -82,7 +67,7 @@
                                                 78
                                             </div>
                                             <div class="text-secondary">
-                                                Brands
+                                                Barang Masuk
                                             </div>
                                         </div>
                                     </div>
@@ -94,16 +79,8 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <span
-                                                class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z" />
-                                                </svg>
+                                            <span class="bg-twitter text-white avatar">
+                                                <i class="ti ti-transfer-out icon"></i>
                                             </span>
                                         </div>
                                         <div class="col">
@@ -111,7 +88,7 @@
                                                 623
                                             </div>
                                             <div class="text-secondary">
-                                                Categories
+                                                Barang Keluar
                                             </div>
                                         </div>
                                     </div>
@@ -123,16 +100,8 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <span
-                                                class="bg-facebook text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-facebook -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
-                                                </svg>
+                                            <span class="bg-facebook text-white avatar">
+                                                <i class="ti ti-users icon"></i>
                                             </span>
                                         </div>
                                         <div class="col">
@@ -140,7 +109,7 @@
                                                 132
                                             </div>
                                             <div class="text-secondary">
-                                                Users
+                                                Pengguna
                                             </div>
                                         </div>
                                     </div>
@@ -178,6 +147,314 @@
                     </div>
                 </div>
 
+
+            </div>
+
+            <div class="row row-cards">
+                <div class="col-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Barang Masuk Terakhir</h3>
+                        </div>
+                        <div class="list-group list-group-flush list-group-hoverable">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
+                                    <div class="col-auto">
+                                        <a href="#">
+                                            <span class="avatar"
+                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
+                                        </a>
+                                    </div> --}}
+                                    <div class="col text-truncate">
+                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-box-align-bottom text-secondary"></i>
+                                            Rexona Deodorant (rex-00399489)
+                                        </div>
+                                        <div class="d-block  text-truncate"><i class="ti ti-transfer-in text-secondary"></i>
+                                            12 Box
+                                        </div>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-calendar-due text-secondary"></i>
+                                            12 Agustus 2024
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#"
+                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
+                                    <div class="col-auto">
+                                        <a href="#">
+                                            <span class="avatar"
+                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
+                                        </a>
+                                    </div> --}}
+                                    <div class="col text-truncate">
+                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-box-align-bottom text-secondary"></i>
+                                            Rexona Deodorant (rex-00399489)
+                                        </div>
+                                        <div class="d-block  text-truncate"><i
+                                                class="ti ti-transfer-in text-secondary"></i>
+                                            12 Box
+                                        </div>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-calendar-due text-secondary"></i>
+                                            12 Agustus 2024
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#"
+                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
+                                    <div class="col-auto">
+                                        <a href="#">
+                                            <span class="avatar"
+                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
+                                        </a>
+                                    </div> --}}
+                                    <div class="col text-truncate">
+                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-box-align-bottom text-secondary"></i>
+                                            Rexona Deodorant (rex-00399489)
+                                        </div>
+                                        <div class="d-block  text-truncate"><i
+                                                class="ti ti-transfer-in text-secondary"></i>
+                                            12 Box
+                                        </div>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-calendar-due text-secondary"></i>
+                                            12 Agustus 2024
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#"
+                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Barang Keluar Terakhir</h3>
+                        </div>
+                        <div class="list-group list-group-flush list-group-hoverable">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
+                                    <div class="col-auto">
+                                        <a href="#">
+                                            <span class="avatar"
+                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
+                                        </a>
+                                    </div> --}}
+                                    <div class="col text-truncate">
+                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-box-align-bottom text-secondary"></i>
+                                            Rexona Deodorant (rex-00399489)
+                                        </div>
+                                        <div class="d-block  text-truncate"><i
+                                                class="ti ti-transfer-out text-secondary"></i>
+                                            12 Box
+                                        </div>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-calendar-due text-secondary"></i>
+                                            12 Agustus 2024
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#"
+                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
+                                    <div class="col-auto">
+                                        <a href="#">
+                                            <span class="avatar"
+                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
+                                        </a>
+                                    </div> --}}
+                                    <div class="col text-truncate">
+                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-box-align-bottom text-secondary"></i>
+                                            Rexona Deodorant (rex-00399489)
+                                        </div>
+                                        <div class="d-block  text-truncate"><i
+                                                class="ti ti-transfer-in text-secondary"></i>
+                                            12 Box
+                                        </div>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-calendar-due text-secondary"></i>
+                                            12 Agustus 2024
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#"
+                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
+                                    <div class="col-auto">
+                                        <a href="#">
+                                            <span class="avatar"
+                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
+                                        </a>
+                                    </div> --}}
+                                    <div class="col text-truncate">
+                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-box-align-bottom text-secondary"></i>
+                                            Rexona Deodorant (rex-00399489)
+                                        </div>
+                                        <div class="d-block  text-truncate"><i
+                                                class="ti ti-transfer-in text-secondary"></i>
+                                            12 Box
+                                        </div>
+                                        <div class="d-block  text-truncate">
+                                            <i class="ti ti-calendar-due text-secondary"></i>
+                                            12 Agustus 2024
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#"
+                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Stok Info</h3>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <i class="ti ti-info-circle icon text-warning"></i>
+                                    </div>
+
+                                    <div class="col text-truncate">
+                                        <a href="#" class="text-reset text-secondary d-block">Rexona Deodorant
+                                            (rex-00399489)</a>
+
+                                        <div class="d-block  text-truncate">
+                                            Sisa Stok : 5
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <i class="ti ti-alert-triangle icon text-danger"></i>
+                                    </div>
+
+                                    <div class="col text-truncate">
+                                        <a href="#" class="text-reset text-secondary text-truncate">Rexona
+                                            Deodorant
+                                            (rex-0039948922222222222)</a>
+
+                                        <div class="d-block  text-truncate">
+                                            Sisa Stok : 0
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
