@@ -94,6 +94,16 @@
                         </span>
                     </a>
                 </li>
+                <li class="nav-item @if (request()->routeIs('satuans.*')) active @endif">
+                    <a class="nav-link" href="{{ route('satuans.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-home icon"></i>
+                        </span>
+                        <span class="nav-link-title">
+                            Satuan
+                        </span>
+                    </a>
+                </li>
                 <li class="nav-item @if (request()->routeIs('products.*')) active @endif">
                     <a class="nav-link" href="{{ route('products.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">

@@ -46,6 +46,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products/pdf', [ProductController::class, 'pdf'])->name('products.pdf');
     Route::resource('products', ProductController::class);
 
-    Route::resource('satuans', SatuanController::class);
+    Route::resource('satuans', SatuanController::class)->except(['show']);
 });
 

@@ -12,4 +12,11 @@ class Satuan extends Model
     protected $fillable = [
         'nama_satuan',
     ];
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('nama_satuan', 'like', '%' . $search . '%');
+        });
+    }
 }

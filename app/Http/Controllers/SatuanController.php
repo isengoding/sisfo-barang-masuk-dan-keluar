@@ -13,7 +13,13 @@ class SatuanController extends Controller
      */
     public function index()
     {
-        $satuans = Satuan::all();
+        $filter['search'] = request()->keyword;
+
+        $satuans = Satuan::query()
+            ->filter($filter)
+            ->latest()
+            ->paginate(10);
+
         return view('pages.satuans.index', compact('satuans'));
     }
 
