@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -44,5 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products/excel', [ProductController::class, 'excel'])->name('products.excel');
     Route::get('/products/pdf', [ProductController::class, 'pdf'])->name('products.pdf');
     Route::resource('products', ProductController::class);
+
+    Route::resource('satuans', SatuanController::class);
 });
 
