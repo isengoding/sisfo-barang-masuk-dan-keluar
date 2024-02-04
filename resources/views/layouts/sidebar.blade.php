@@ -97,10 +97,20 @@
                 <li class="nav-item @if (request()->routeIs('satuans.*')) active @endif">
                     <a class="nav-link" href="{{ route('satuans.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <i class="ti ti-home icon"></i>
+                            <i class="ti ti-box-padding icon"></i>
                         </span>
                         <span class="nav-link-title">
                             Satuan
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item @if (request()->routeIs('kategori.*')) active @endif">
+                    <a class="nav-link" href="{{ route('kategori.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-category-2 icon"></i>
+                        </span>
+                        <span class="nav-link-title">
+                            Kategori
                         </span>
                     </a>
                 </li>
