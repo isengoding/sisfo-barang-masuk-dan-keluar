@@ -50,8 +50,8 @@
         <div class="container-xl">
 
             <!-- Alert -->
-            <x-alert-success />
-            <x-alert-error />
+            {{-- <x-alert-success />
+            <x-alert-error /> --}}
 
             <div class="row">
                 <div class="col-12 col-lg-3">
@@ -183,6 +183,12 @@
 @endsection
 
 @push('custom_script')
+
+    @if (session()->has('success'))
+        <script>
+            toastr["success"]("{{ session()->get('success') }}", "Success")
+        </script>
+    @endif
     <script>
         function handleDelete(route) {
             let form = document.getElementById('deleteForm')

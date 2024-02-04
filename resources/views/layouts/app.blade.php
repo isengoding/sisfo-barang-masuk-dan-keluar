@@ -21,12 +21,14 @@
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
         rel="stylesheet" />
 
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/tabler-flags.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/tabler-payments.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -62,6 +64,28 @@
 
     <!-- Libs JS -->
     <script src="{{ asset('dist/libs/tom-select/dist/js/tom-select.base.min.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
 
     <!-- Tabler Core -->
     <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
