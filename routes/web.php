@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +48,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
 
     Route::resource('satuans', SatuanController::class)->except(['show']);
+    Route::resource('kategori', KategoriController::class)->except(['show']);
 });
 
