@@ -94,6 +94,7 @@
                         </span>
                     </a>
                 </li>
+                <span class="ms-3 text-secondary mt-3 mb-1">Master Data</span>
                 <li class="nav-item @if (request()->routeIs('satuans.*')) active @endif">
                     <a class="nav-link" href="{{ route('satuans.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -120,7 +121,28 @@
                             <i class="ti ti-notebook icon"></i>
                         </span>
                         <span class="nav-link-title">
-                            Product
+                            Produk
+                        </span>
+                    </a>
+                </li>
+                <span class="ms-3 text-secondary mt-3 mb-1">Transaksi</span>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('products.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-transfer-in icon"></i>
+                        </span>
+                        <span class="nav-link-title">
+                            Barang Masuk
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('products.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-transfer-out icon"></i>
+                        </span>
+                        <span class="nav-link-title">
+                            Barang Keluar
                         </span>
                     </a>
                 </li>

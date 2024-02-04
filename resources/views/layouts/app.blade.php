@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>Laravel Inventory</title>
     <!-- CSS files -->
     <!-- Filepond stylesheet -->
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
