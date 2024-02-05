@@ -125,6 +125,27 @@
                         </span>
                     </a>
                 </li>
+                <span class="ms-3 text-secondary mt-3 mb-1">Kontak</span>
+                <li class="nav-item @if (request()->routeIs('pelanggan.*')) active @endif">
+                    <a class="nav-link" href="{{ route('pelanggan.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-address-book icon"></i>
+                        </span>
+                        <span class="nav-link-title">
+                            Pelanggan
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('products.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-phone-call icon"></i>
+                        </span>
+                        <span class="nav-link-title">
+                            Pemasok
+                        </span>
+                    </a>
+                </li>
                 <span class="ms-3 text-secondary mt-3 mb-1">Transaksi</span>
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('products.index') }}">
