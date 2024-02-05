@@ -5,6 +5,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PelangganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('satuans', SatuanController::class)->except(['show']);
     Route::resource('kategori', KategoriController::class)->except(['show']);
+    Route::resource('pelanggan', PelangganController::class)->except(['show']);
 });
 
