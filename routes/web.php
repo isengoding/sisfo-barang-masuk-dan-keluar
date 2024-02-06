@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\ProductController;
@@ -53,5 +54,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kategori', KategoriController::class)->except(['show']);
     Route::resource('pelanggan', PelangganController::class)->except(['show']);
     Route::resource('pemasok', PemasokController::class)->except(['show']);
+    Route::resource('barang', BarangController::class);
 });
 
