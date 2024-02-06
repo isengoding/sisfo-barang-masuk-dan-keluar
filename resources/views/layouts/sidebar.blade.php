@@ -136,8 +136,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('products.index') }}">
+                <li class="nav-item @if (request()->routeIs('pemasok.*')) active @endif">
+                    <a class="nav-link" href="{{ route('pemasok.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <i class="ti ti-phone-call icon"></i>
                         </span>
