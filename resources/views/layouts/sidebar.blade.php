@@ -115,13 +115,13 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item @if (request()->routeIs('products.*')) active @endif">
-                    <a class="nav-link" href="{{ route('products.index') }}">
+                <li class="nav-item @if (request()->routeIs('barang.*')) active @endif">
+                    <a class="nav-link" href="{{ route('barang.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <i class="ti ti-notebook icon"></i>
                         </span>
                         <span class="nav-link-title">
-                            Produk
+                            Barang
                         </span>
                     </a>
                 </li>

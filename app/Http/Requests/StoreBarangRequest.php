@@ -25,6 +25,7 @@ class StoreBarangRequest extends FormRequest
             'nama_barang' => 'required',
             'kode' => 'required|unique:barangs,kode',
             'satuan_id' => 'required|exists:satuans,id',
+            'kategori_id' => 'required|exists:kategoris,id',
             'stok' => 'required|numeric',
             'min_stok' => 'required|numeric',
             'harga' => 'required|numeric',
