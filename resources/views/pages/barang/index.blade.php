@@ -17,12 +17,7 @@
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <span class="d-none d-sm-inline">
-                            <a href="#" class="btn">
-                                New view
-                            </a>
-                        </span>
-                        <a href="{{ route('products.import.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                        <a href="{{ route('barang.import.create') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <i class="ti ti-table-import icon"></i>
                             Import
                         </a>
@@ -47,8 +42,26 @@
                             </svg>
                             Tambah Barang
                         </a>
-                        <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-                            data-bs-target="#modal-report" aria-label="Create new report">
+                        {{-- <span class="dropdown"> --}}
+                        <button class="btn btn-icon d-sm-none" data-bs-toggle="dropdown" aria-expanded="true">
+                            <i class="ti ti-dots icon"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-end">
+                            <a class="dropdown-item" href="{{ route('barang.import.create') }}">
+                                <i class="ti ti-table-import icon text-secondary me-2"></i>
+                                Import
+                            </a>
+                            <a class="dropdown-item" href="{{ route('barang.excel') }}">
+                                <i class="ti ti-table-export icon text-secondary me-2"></i>
+                                Excel
+                            </a>
+                            <a class="dropdown-item" href="{{ route('barang.pdf') }}">
+                                <i class="ti ti-file-export icon text-secondary me-2"></i>
+                                PDF
+                            </a>
+                        </div>
+                        {{-- </span> --}}
+                        <a href="{{ route('barang.create') }}" class="btn btn-primary d-sm-none btn-icon">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"

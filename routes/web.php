@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\BarangExportController;
-use App\Http\Controllers\FilepondController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FilepondController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\BarangExportController;
+use App\Http\Controllers\BarangImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/barang/pdf', [BarangExportController::class, 'pdf'])->name('barang.pdf');
     Route::get('/barang/excel', [BarangExportController::class, 'excel'])->name('barang.excel');
+    Route::get('/barang/import', [BarangImportController::class, 'create'])->name('barang.import.create');
+    Route::post('/barang/import', [BarangImportController::class, 'store'])->name('barang.import.store');
     Route::resource('barang', BarangController::class);
 
     Route::post('filepond', [FilepondController::class, 'store'])->name('filepond.store');
