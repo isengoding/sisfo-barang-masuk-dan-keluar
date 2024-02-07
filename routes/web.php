@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('pemasok', PemasokController::class)->except(['show']);
 
     Route::get('/barang/pdf', [BarangExportController::class, 'pdf'])->name('barang.pdf');
+    Route::get('/barang/excel', [BarangExportController::class, 'excel'])->name('barang.excel');
     Route::resource('barang', BarangController::class);
 
     Route::post('filepond', [FilepondController::class, 'store'])->name('filepond.store');

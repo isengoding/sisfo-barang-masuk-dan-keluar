@@ -31,7 +31,7 @@
                             <i class="ti ti-file-export icon"></i>
                             PDF
                         </a>
-                        <a href="{{ route('products.excel') }}" target="_blank"
+                        <a href="{{ route('barang.excel') }}" target="_blank"
                             class="btn btn-primary d-none d-sm-inline-block">
                             <i class="ti ti-table-export icon"></i>
                             Excel
