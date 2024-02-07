@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangExportController;
 use App\Http\Controllers\FilepondController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
@@ -55,6 +56,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kategori', KategoriController::class)->except(['show']);
     Route::resource('pelanggan', PelangganController::class)->except(['show']);
     Route::resource('pemasok', PemasokController::class)->except(['show']);
+
+    Route::get('/barang/pdf', [BarangExportController::class, 'pdf'])->name('barang.pdf');
     Route::resource('barang', BarangController::class);
 
     Route::post('filepond', [FilepondController::class, 'store'])->name('filepond.store');

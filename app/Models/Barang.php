@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -53,5 +54,13 @@ class Barang extends Model
     public function kategoris(): BelongsToMany
     {
         return $this->belongsToMany(Kategori::class);
+    }
+
+    protected function imageBase64(): Attribute
+    {
+        $gambarPath = public_path('storage/' . $this->gambar);
+        return Attribute::make(
+            get: fn() => base64_encode(file_get_contents($gambarPath)),
+        );
     }
 }

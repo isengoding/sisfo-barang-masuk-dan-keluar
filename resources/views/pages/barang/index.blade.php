@@ -26,7 +26,7 @@
                             <i class="ti ti-table-import icon"></i>
                             Import
                         </a>
-                        <a href="{{ route('products.pdf') }}" target="_blank"
+                        <a href="{{ route('barang.pdf') }}" target="_blank"
                             class="btn btn-primary d-none d-sm-inline-block">
                             <i class="ti ti-file-export icon"></i>
                             PDF
