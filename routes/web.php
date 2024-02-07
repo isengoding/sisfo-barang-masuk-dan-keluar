@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FilepondController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\BarangController;
@@ -55,5 +56,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('pelanggan', PelangganController::class)->except(['show']);
     Route::resource('pemasok', PemasokController::class)->except(['show']);
     Route::resource('barang', BarangController::class);
+
+    Route::post('filepond', [FilepondController::class, 'store'])->name('filepond.store');
+    Route::delete('filepond', [FilepondController::class, 'destroy'])->name('filepond.destroy');
 });
 
