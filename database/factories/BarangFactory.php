@@ -19,13 +19,13 @@ class BarangFactory extends Factory
     {
         return [
             'nama_barang' => $this->faker->word(),
-            'kode' => $this->faker->word(),
+            'kode' => time() . '-' . $this->faker->unique()->word(),
             'satuan_id' => Satuan::factory(),
             'stok' => $this->faker->numberBetween(1, 100),
             'min_stok' => $this->faker->numberBetween(1, 100),
             'harga' => $this->faker->numberBetween(1, 1000),
             'gambar' => "gambar/default.png",
-            'keterangan' => $this->faker->word(),
+            'keterangan' => $this->faker->sentence(),
         ];
     }
 }

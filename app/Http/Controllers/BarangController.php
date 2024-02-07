@@ -103,18 +103,18 @@ class BarangController extends Controller
 
         try {
             \DB::beginTransaction();
-            // if (!empty($request->input('gambar'))) {
+            if (!empty($request->input('gambar'))) {
 
-            //     if (Str::afterLast($request->input('gambar'), '/') !== Str::afterLast($barang->gambar, '/')) {
-            //         $newFilename = Str::after($request->input('gambar'), 'tmp/');
-            //         if (Storage::exists('public/' . $barang->gambar) && $barang->gambar !== "gambar/default.png") {
-            //             Storage::delete('public/' . $barang->gambar);
-            //         }
-            //         Storage::disk('public')->move($request->input('gambar'), "gambar/$newFilename");
-            //         $data['gambar'] = "gambar/$newFilename";
-            //     }
+                if (Str::afterLast($request->input('gambar'), '/') !== Str::afterLast($barang->gambar, '/')) {
+                    $newFilename = Str::after($request->input('gambar'), 'tmp/');
+                    if (Storage::exists('public/' . $barang->gambar) && $barang->gambar !== "gambar/default.png") {
+                        Storage::delete('public/' . $barang->gambar);
+                    }
+                    Storage::disk('public')->move($request->input('gambar'), "gambar/$newFilename");
+                    $data['gambar'] = "gambar/$newFilename";
+                }
 
-            // }
+            }
 
             $barang->update($data);
             $barang->kategoris()->sync($data['kategori_id']);
@@ -136,7 +136,9 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-
+        if (Storage::exists('public/' . $barang->gambar) && $barang->gambar !== "gambar/default.png") {
+            Storage::delete('public/' . $barang->gambar);
+        }
         $barang->delete();
         return redirect(route('barang.index'))->withSuccess('Data deleted successfully');
     }

@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'admin@admin.com',
         // ]);
 
-        \App\Models\Barang::factory()->hasAttached(Kategori::factory(2)->create())->create();
+        \App\Models\Barang::factory(11)->hasAttached(Kategori::factory(1)->create())->create();
     }
 }

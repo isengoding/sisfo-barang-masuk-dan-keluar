@@ -27,7 +27,6 @@ class FilepondController extends Controller
 
     public function destroy(Request $request)
     {
-        // dd($request->getContent());
         Storage::disk('public')->delete($request->getContent());
     }
 }

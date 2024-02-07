@@ -163,9 +163,9 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Gambar</label>
-                                            <input type="file" name="image" value="{{ old('image') }}" id="image"
-                                                class="form-control @error('image') is-invalid @enderror">
-                                            @error('image')
+                                            <input type="file" name="gambar" value="{{ old('gambar') }}" id="gambar"
+                                                class="form-control @error('gambar') is-invalid @enderror">
+                                            @error('gambar')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -231,7 +231,7 @@
             })
 
             // Turn input element into a pond
-            const inputElement = document.querySelector('#image');
+            const inputElement = document.querySelector('#gambar');
             const pond = FilePond.create(inputElement, {
                 allowFileTypeValidation: true,
                 maxFileSize: '3MB',
@@ -239,12 +239,24 @@
                 allowFileSizeValidation: true,
                 acceptedFileTypes: ['image/*'],
                 server: {
-                    process: '{{ route('images.upload') }}',
-                    revert: '{{ route('images.revert') }}',
+                    load: (source, load, error, progress, abort, headers) => {
+                        const myRequest = new Request(source);
+                        fetch(myRequest).then((res) => {
+                            return res.blob();
+                        }).then(load);
+                    },
+                    process: '{{ route('filepond.store') }}',
+                    revert: '{{ route('filepond.destroy') }}',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     }
-                }
+                },
+                files: [{
+                    source: '{{ Storage::disk('public')->url($barang->gambar) }}',
+                    options: {
+                        type: 'local',
+                    },
+                }],
             });
 
 
