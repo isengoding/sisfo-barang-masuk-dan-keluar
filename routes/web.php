@@ -11,6 +11,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\BarangExportController;
 use App\Http\Controllers\BarangImportController;
+use App\Http\Controllers\BarangKeluarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,5 +67,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('filepond', [FilepondController::class, 'store'])->name('filepond.store');
     Route::delete('filepond', [FilepondController::class, 'destroy'])->name('filepond.destroy');
+
+    Route::resource('barang-keluar', BarangKeluarController::class);
 });
 

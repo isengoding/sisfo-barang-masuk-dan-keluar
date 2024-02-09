@@ -29,6 +29,7 @@
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    @livewireStyles
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -92,6 +93,7 @@
     <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
 
     @stack('custom_script')
+    @livewireScripts
 </body>
 
 </html>
