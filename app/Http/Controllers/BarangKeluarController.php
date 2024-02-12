@@ -41,17 +41,17 @@ class BarangKeluarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(BarangKeluar $barangKeluar)
     {
-        //
+        return view('pages.barang-keluar.show', compact('barangKeluar'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(BarangKeluar $barangKeluar)
     {
-        //
+        return view('pages.barang-keluar.edit', compact('barangKeluar'));
     }
 
     /**
@@ -65,8 +65,14 @@ class BarangKeluarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(BarangKeluar $barangKeluar)
     {
-        //
+        foreach ($barangKeluar->barangKeluarDetails as $value) {
+            $value->barang->increment('stok', $value->qty);
+        }
+
+        $barangKeluar->delete();
+
+        return redirect()->route('barang-keluar.index')->with('success', 'Barang Keluar Deleted Successfully.');
     }
 }

@@ -8,25 +8,38 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        Transaksi
+                        Barang Keluar
                     </div>
                     <h2 class="page-title">
-                        Barang Keluar
+                        {{ $barangKeluar->no_transaksi }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('barang-keluar.create') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        <button type="button" class="btn btn-primary" onclick="javascript:window.print();">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/printer -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 5l0 14" />
-                                <path d="M5 12l14 0" />
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2">
+                                </path>
+                                <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4"></path>
+                                <path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z">
+                                </path>
                             </svg>
-                            Transaksi Baru
+                            Print
+                        </button>
+                        <a href="{{ route('barang-keluar.edit', $barangKeluar) }}"
+                            class="btn btn-primary d-none d-sm-inline-block">
+                            <i class="ti ti-edit icon me-2"></i>
+                            Edit
+                        </a>
+                        <a href="#" class="btn btn-danger d-none d-sm-inline-block"
+                            onclick="handleDelete(`{{ route('barang-keluar.destroy', $barangKeluar->id) }}`)">
+                            <i class="ti ti-trash icon me-2"></i>
+                            Hapus
                         </a>
                         <a href="{{ route('barang-keluar.create') }}" class="btn btn-primary d-sm-none btn-icon"
                             data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
@@ -41,6 +54,10 @@
                         </a>
                     </div>
                 </div>
+
+
+
+
             </div>
         </div>
     </div>
@@ -50,110 +67,88 @@
         <div class="container-xl">
 
             <!-- Alert -->
-            <x-alert-success />
+            {{-- <x-alert-success /> --}}
             <x-alert-error />
 
             <div class="row">
-                <div class="col-12 col-lg-3">
-                    <form action="" method="get">
-                        <div class="input-icon mb-3">
-                            <input type="search" value="{{ request()->query('keyword') }}" class="form-control w-100"
-                                name="keyword" placeholder="Search…">
-                            <span class="input-icon-addon">
-                                <i class="icon ti ti-search"></i>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row row-deck row-cards">
                 <div class="col-12">
-                    <div class="card">
-                        <div class="table-responsive">
-                            <table class="table table-vcenter table-mobile-md card-table">
+                    <div class="card card-lg">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="h3">Perusahaan</p>
+                                    <address>
+                                        Street Address<br>
+                                        State, City<br>
+                                        Region, Postal Code<br>
+                                        ltd@example.com
+                                    </address>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p class="h3">Pelanggan</p>
+                                    <address>
+                                        {{ $barangKeluar->pelanggan->nama_pelanggan }}<br>
+                                        {{ $barangKeluar->pelanggan->alamat }}<br>
+                                        {{ $barangKeluar->pelanggan->notelp }}<br>
+                                        {{ $barangKeluar->pelanggan->email }}
+                                    </address>
+                                </div>
+                                <div class="col-12 my-5">
+                                    <div class="fs-2">{{ $barangKeluar->no_transaksi }}</div>
+                                    <div>{{ \Carbon\Carbon::parse($barangKeluar->tgl_keluar)->format('d M Y') }}</div>
+                                </div>
+                            </div>
+                            <table class="table table-transparent table-responsive">
                                 <thead>
                                     <tr>
-                                        <th class="w-1">No</th>
-                                        <th>Tgl Transaksi</th>
-                                        <th>No. Transaksi</th>
-                                        <th>Pelanggan</th>
-                                        <th class="text-center">Total qty</th>
-                                        <th class="text-end">Total Harga</th>
-
-                                        <th class="w-1"></th>
+                                        <th class="text-center" style="width: 1%"></th>
+                                        <th>Barang</th>
+                                        <th class="text-center" style="width: 1%">Satuan</th>
+                                        <th class="text-center" style="width: 1%">Jumlah</th>
+                                        <th class="text-end" style="width: 1%">Harga</th>
+                                        <th class="text-end" style="width: 1%">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($barangKeluars as $row)
+                                    @foreach ($barangKeluar->barangKeluarDetails as $item)
                                         <tr>
-                                            <td class="text-secondary align-text-top" data-label="No">
-                                                {{ $loop->iteration + $barangKeluars->firstItem() - 1 }}
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>
+                                                <p class="strong mb-1">{{ $item->barang->nama_barang }}</p>
+                                                <div class="text-secondary">{{ $item->barang->kode }}</div>
                                             </td>
-
-
-                                            <td class="align-text-top" data-label="Tanggal">
-                                                {{ $row->tgl_keluar }}
+                                            <td class="text-center">
+                                                {{ $item->barang->satuan->nama_satuan }}
                                             </td>
-                                            <td class="align-text-top" data-label="No. Transaksi">
-                                                <a
-                                                    href="{{ route('barang-keluar.show', $row->id) }}">{{ $row->no_transaksi }}</a>
-
+                                            <td class="text-center">
+                                                {{ $item->qty }}
                                             </td>
-                                            <td class="align-text-top" data-label="Pelanggan">
-                                                {{ $row->pelanggan->nama_pelanggan }}
-                                            </td>
-                                            <td class="align-text-top text-start text-lg-center" data-label="Total Qty">
-                                                {{ $row->total_qty }}
-                                            </td>
-                                            <td class="align-text-top text-start text-lg-end" data-label="Total Harga">
-                                                Rp. {{ number_format($row->total_harga) }}
-                                            </td>
-
-
-                                            <td class="align-text-top">
-                                                <a href="#" class="link-underline link-underline-opacity-0"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ti ti-dots icon"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-end" style="">
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('barang-keluar.edit', $row->id) }}">
-                                                        <i class="ti ti-edit icon text-secondary me-2"></i>
-                                                        Edit
-                                                    </a>
-                                                    <a class="dropdown-item text-danger" href="#"
-                                                        onclick="handleDelete(`{{ route('barang-keluar.destroy', $row->id) }}`)">
-                                                        <i class="ti ti-trash icon me-2 opacity-50"></i>
-                                                        Delete
-                                                    </a>
-                                                </div>
-
+                                            <td class="text-end text-nowrap">Rp. {{ number_format($item->harga) }}</td>
+                                            <td class="text-end text-nowrap">Rp. {{ number_format($item->total_harga) }}
                                             </td>
                                         </tr>
-
-                                    @empty
-                                        <tr>
-                                            <td colspan="7" class="text-center">
-                                                No data found.
-                                            </td>
-                                        </tr>
-                                    @endforelse
+                                    @endforeach
 
 
+                                    <tr>
+                                        <td colspan="5" class="font-weight-bold text-uppercase text-end">Total
+
+                                        </td>
+                                        <td class="font-weight-bold text-end text-nowrap">Rp.
+                                            {{ number_format($barangKeluar->total_harga) }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
-                        </div>
 
-                        <div class="card-footer d-flex justify-content-center align-items-center">
-                            {{ $barangKeluars->onEachSide(1)->withQueryString()->withPath(request()->fullUrl())->links() }}
                         </div>
                     </div>
+
                 </div>
-
-
             </div>
+
         </div>
     </div>
+
 
     <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -212,5 +207,7 @@
             var modalConfirm = new bootstrap.Modal(document.getElementById('modal-danger'));
             modalConfirm.show();
         }
+
+        // window.print();
     </script>
 @endpush

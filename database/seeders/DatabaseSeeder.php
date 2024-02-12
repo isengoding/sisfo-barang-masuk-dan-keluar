@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\Product::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Jenniya',
-        //     'email' => 'admin@admin.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Jenniya',
+            'email' => 'admin@admin.com',
+        ]);
 
         \App\Models\Barang::factory(11)->hasAttached(Kategori::factory(1)->create())->create();
     }
