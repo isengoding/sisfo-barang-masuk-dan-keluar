@@ -47,6 +47,6 @@ class BarangMasuk extends Model
      */
     public function barangMasukDetails(): HasMany
     {
-        return $this->hasMany(BarangMasuk::class);
+        return $this->hasMany(BarangMasukDetail::class);
     }
 }

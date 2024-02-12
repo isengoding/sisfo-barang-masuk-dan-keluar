@@ -147,8 +147,8 @@
                     </a>
                 </li>
                 <span class="ms-3 text-secondary mt-3 mb-1">Transaksi</span>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('products.index') }}">
+                <li class="nav-item @if (request()->routeIs('barang-masuk.*')) active @endif">
+                    <a class="nav-link" href="{{ route('barang-masuk.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <i class="ti ti-transfer-in icon"></i>
                         </span>

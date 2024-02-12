@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FilepondController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangExportController;
 use App\Http\Controllers\BarangImportController;
 use App\Http\Controllers\BarangKeluarController;
@@ -69,5 +70,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('filepond', [FilepondController::class, 'destroy'])->name('filepond.destroy');
 
     Route::resource('barang-keluar', BarangKeluarController::class);
+    Route::resource('barang-masuk', BarangMasukController::class);
 });
 
