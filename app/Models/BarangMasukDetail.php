@@ -18,6 +18,29 @@ class BarangMasukDetail extends Model
         'total_harga',
     ];
 
+    public function scopeFilter($query, array $filters)
+    {
+        // $query->when($filters['search'] ?? null, function ($query, $search) {
+        //     $query->where('nama_barang', 'like', '%' . $search . '%')
+        //         ->orWhere('kode', 'like', '%' . $search . '%')
+        //         ->orWhere('harga', 'like', '%' . $search . '%')
+        //         ->orWhere('stok', 'like', '%' . $search . '%')
+        //         ->orWhereHas('satuan', function ($query) use ($search) {
+        //             $query->where('nama_satuan', 'like', '%' . $search . '%');
+        //         });
+        // });
+
+        // Filter results between two dates if 'date_from' and 'date_to' are set in the filters
+        $query->when(
+            !empty($filters['date_from']) && !empty($filters['date_to']),
+            function ($query) use ($filters) {
+                $query->whereHas('barangMasuk', function ($query) use ($filters) {
+                    $query->whereBetween('tgl_masuk', [$filters['date_from'], $filters['date_to']]);
+                });
+            }
+        );
+    }
+
     /**
      * Get the barangMasuk that owns the BarangMasukDetail
      *
