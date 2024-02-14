@@ -14,6 +14,7 @@ use App\Http\Controllers\BarangExportController;
 use App\Http\Controllers\BarangImportController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\BarangMasukLaporanController;
+use App\Http\Controllers\BarangKeluarLaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,10 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
+    Route::get('/home', function () {
+        return view('dashboard');
+    });
+
     Route::resource('images', ImageController::class);
 
     Route::get('/products/import/create', [ProductController::class, 'importCreate'])->name('products.import.create');
@@ -70,6 +75,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('filepond', [FilepondController::class, 'store'])->name('filepond.store');
     Route::delete('filepond', [FilepondController::class, 'destroy'])->name('filepond.destroy');
 
+    // Routes for Barang Keluar Laporan
+    Route::get('barang-keluar/laporan/excel', [BarangKeluarLaporanController::class, 'excel'])
+        ->name('barang-keluar.laporan.excel');
+
+    Route::get('barang-keluar/laporan/pdf', [BarangKeluarLaporanController::class, 'pdf'])
+        ->name('barang-keluar.laporan.pdf');
+
+    Route::get('barang-keluar/laporan', [BarangKeluarLaporanController::class, 'index'])->name('barang-keluar.laporan');
+
+    // Resource routes for Barang Keluar
     Route::resource('barang-keluar', BarangKeluarController::class);
 
     Route::get('barang-masuk/laporan/pdf', [BarangMasukLaporanController::class, 'pdf'])

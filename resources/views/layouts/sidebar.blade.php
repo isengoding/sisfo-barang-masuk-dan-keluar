@@ -147,7 +147,10 @@
                     </a>
                 </li>
                 <span class="ms-3 text-secondary mt-3 mb-1">Transaksi</span>
-                <li class="nav-item @if (request()->routeIs('barang-masuk.*')) active @endif">
+                <li class="nav-item @if (request()->routeIs('barang-masuk.index') ||
+                        request()->routeIs('barang-masuk.create') ||
+                        request()->routeIs('barang-masuk.edit') ||
+                        request()->routeIs('barang-masuk.show')) active @endif">
                     <a class="nav-link" href="{{ route('barang-masuk.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <i class="ti ti-transfer-in icon"></i>
@@ -171,15 +174,15 @@
                 <li class="nav-item @if (request()->routeIs('barang-masuk.laporan')) active @endif">
                     <a class="nav-link" href="{{ route('barang-masuk.laporan') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <i class="ti ti-transfer-in icon"></i>
+                            <i class="ti ti-report-analytics icon"></i>
                         </span>
                         <span class="nav-link-title">
                             Barang Masuk
                         </span>
                     </a>
                 </li>
-                <li class="nav-item @if (request()->routeIs('barang-keluar.*')) active @endif">
-                    <a class="nav-link" href="{{ route('barang-keluar.index') }}">
+                <li class="nav-item @if (request()->routeIs('barang-keluar.laporan')) active @endif">
+                    <a class="nav-link" href="{{ route('barang-keluar.laporan') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <i class="ti ti-transfer-out icon"></i>
                         </span>

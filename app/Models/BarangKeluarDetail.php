@@ -37,4 +37,19 @@ class BarangKeluarDetail extends Model
     {
         return $this->belongsTo(Barang::class);
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+
+        // Filter results between two dates if 'date_from' and 'date_to' are set in the filters
+        $query->when(
+            !empty($filters['date_from']) && !empty($filters['date_to']),
+            function ($query) use ($filters) {
+                $query->whereHas('barangKeluar', function ($query) use ($filters) {
+                    $query->whereBetween('tgl_keluar', [$filters['date_from'], $filters['date_to']]);
+                    // ->orderBy('tgl_masuk', 'desc');
+                });
+            }
+        );
+    }
 }

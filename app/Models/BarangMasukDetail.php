@@ -36,6 +36,7 @@ class BarangMasukDetail extends Model
             function ($query) use ($filters) {
                 $query->whereHas('barangMasuk', function ($query) use ($filters) {
                     $query->whereBetween('tgl_masuk', [$filters['date_from'], $filters['date_to']]);
+                    // ->orderBy('tgl_masuk', 'desc');
                 });
             }
         );
