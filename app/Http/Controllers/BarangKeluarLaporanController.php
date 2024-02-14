@@ -53,7 +53,8 @@ class BarangKeluarLaporanController extends Controller
         return BarangKeluarDetail::query()
             ->with('barang', 'barangKeluar')
             ->filter($filter)
-            // ->orderBy('tgl_masuk', 'asc')
+            // ->orderBy('id', 'desc')
+            ->latest()
             ->get();
     }
 }

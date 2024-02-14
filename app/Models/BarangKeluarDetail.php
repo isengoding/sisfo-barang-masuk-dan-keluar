@@ -47,7 +47,7 @@ class BarangKeluarDetail extends Model
             function ($query) use ($filters) {
                 $query->whereHas('barangKeluar', function ($query) use ($filters) {
                     $query->whereBetween('tgl_keluar', [$filters['date_from'], $filters['date_to']]);
-                    // ->orderBy('tgl_masuk', 'desc');
+                    // ->orderBy('created_at', 'desc')
                 });
             }
         );
