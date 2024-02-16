@@ -13,6 +13,7 @@ use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangExportController;
 use App\Http\Controllers\BarangImportController;
 use App\Http\Controllers\BarangKeluarController;
+use App\Http\Controllers\BarangStokLaporanController;
 use App\Http\Controllers\BarangMasukLaporanController;
 use App\Http\Controllers\BarangKeluarLaporanController;
 
@@ -65,6 +66,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kategori', KategoriController::class)->except(['show']);
     Route::resource('pelanggan', PelangganController::class)->except(['show']);
     Route::resource('pemasok', PemasokController::class)->except(['show']);
+
+    Route::get('/barang/stok/laporan/pdf', [BarangStokLaporanController::class, 'pdf'])->name('barang.stok.pdf');
+    Route::get('/barang/stok/laporan/excel', [BarangStokLaporanController::class, 'excel'])->name('barang.stok.excel');
+    Route::get('/barang/stok/laporan', [BarangStokLaporanController::class, 'index'])->name('barang.stok');
 
     Route::get('/barang/pdf', [BarangExportController::class, 'pdf'])->name('barang.pdf');
     Route::get('/barang/excel', [BarangExportController::class, 'excel'])->name('barang.excel');

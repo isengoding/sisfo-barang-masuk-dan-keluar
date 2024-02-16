@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Barang;
+use App\Models\BarangMasuk;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,11 @@ class BarangMasukDetailFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'barang_masuk_id' => BarangMasuk::factory(),
+            'barang_id' => Barang::factory(),
+            'qty' => $this->faker->numberBetween(1, 10),
+            'harga' => $this->faker->numberBetween(1, 10),
+            'total_harga' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

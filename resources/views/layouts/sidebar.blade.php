@@ -115,7 +115,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item @if (request()->routeIs('barang.*')) active @endif">
+                <li class="nav-item @if (request()->routeIs('barang.index')) active @endif">
                     <a class="nav-link" href="{{ route('barang.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <i class="ti ti-notebook icon"></i>
@@ -188,6 +188,16 @@
                         </span>
                         <span class="nav-link-title">
                             Barang Keluar
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item @if (request()->routeIs('barang.stok')) active @endif">
+                    <a class="nav-link" href="{{ route('barang.stok') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-transfer-out icon"></i>
+                        </span>
+                        <span class="nav-link-title">
+                            Stok Barang
                         </span>
                     </a>
                 </li>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -56,11 +57,55 @@ class Barang extends Model
         return $this->belongsToMany(Kategori::class);
     }
 
+    /**
+     * Get all of the barangMasukDetails for the Barang
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function barangMasukDetails(): HasMany
+    {
+        return $this->hasMany(BarangMasukDetail::class);
+    }
+
+    /**
+     * Get all of the barangKeluarDetails for the Barang
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function barangKeluarDetails(): HasMany
+    {
+        return $this->hasMany(BarangKeluarDetail::class);
+    }
+
     protected function imageBase64(): Attribute
     {
         $gambarPath = public_path('storage/' . $this->gambar);
         return Attribute::make(
             get: fn() => base64_encode(file_get_contents($gambarPath)),
+        );
+    }
+
+    /**
+     * Get the total 'barang masuk' for the Barang
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function totalBarangMasuk(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->barangMasukDetails()->sum('qty'),
+        );
+    }
+
+    /**
+     * Get the total 'barang keluar' for the Barang
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function totalBarangKeluar(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->barangKeluarDetails()->sum('qty'),
         );
     }
 }
