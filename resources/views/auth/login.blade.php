@@ -13,7 +13,7 @@
                     <div class="container-tight">
                         <div class="text-center mb-4">
                             <a href="." class="navbar-brand navbar-brand-autodark"><img src="#" height="36"
-                                    alt="">Laravel Tabler Starter</a>
+                                    alt="">Laravel Inventori</a>
                         </div>
                         <div class="card card-md">
                             <div class="card-body">

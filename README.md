@@ -45,6 +45,15 @@ Sistem informasi pencatatan barang masuk dan keluar menggunakan framework larave
     ```sh
 	php artisan test
 	```
+## Screenshot
+- Halaman Login
+![Alt text](/screenshot/login.png "login page")
+
+- Halaman Data Barang
+![Alt text](/screenshot/data-barang.png "login page")
+
+- Transaksi Barang Masuk
+![Alt text](/screenshot/transaksi-barang-masuk.png "login page")
 
  ## Author
 Dharma – isengoding@gmail.com
