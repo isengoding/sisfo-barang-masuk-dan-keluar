@@ -41,6 +41,11 @@ Sistem informasi pencatatan barang masuk dan keluar menggunakan framework larave
 	```
 - Buka di browser http://localhost:8000
 
+- Testing
+    ```sh
+	php artisan test
+	```
+
  ## Author
 Dharma – isengoding@gmail.com
 
