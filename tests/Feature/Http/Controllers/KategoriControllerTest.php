@@ -97,7 +97,7 @@ class KategoriControllerTest extends TestCase
 
         $existingKategori = Kategori::factory()->create();
 
-        $updateKategori = Kategori::factory()->make()->toArray();
+        $updateKategori = Kategori::factory()->make(['nama_kategori' => 'UpdatedKategori'])->toArray();
 
         $response = $this->put(route('kategori.update', $existingKategori), $updateKategori);
 
