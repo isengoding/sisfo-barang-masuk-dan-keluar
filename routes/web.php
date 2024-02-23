@@ -8,6 +8,7 @@ use App\Http\Controllers\PemasokController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FilepondController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangExportController;
@@ -46,13 +47,8 @@ Route::delete('revert', [ImageController::class, 'revert'])->name('images.revert
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
-    Route::get('/home', function () {
-        return view('dashboard');
-    });
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/home', [DashboardController::class, 'index']);
 
     Route::resource('images', ImageController::class);
 

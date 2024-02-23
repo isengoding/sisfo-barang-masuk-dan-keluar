@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                132
+                                                {{ $totalProduk }}
                                             </div>
                                             <div class="text-secondary">
                                                 Produk
@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                78
+                                                {{ $totalBarangMasuk }}
                                             </div>
                                             <div class="text-secondary">
                                                 Barang Masuk
@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                623
+                                                {{ $totalBarangKeluar }}
                                             </div>
                                             <div class="text-secondary">
                                                 Barang Keluar
@@ -106,7 +106,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="font-weight-medium">
-                                                132
+                                                {{ $totalUser }}
                                             </div>
                                             <div class="text-secondary">
                                                 Pengguna
@@ -157,125 +157,45 @@
                             <h3 class="card-title">Barang Masuk Terakhir</h3>
                         </div>
                         <div class="list-group list-group-flush list-group-hoverable">
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
-                                    <div class="col-auto">
-                                        <a href="#">
-                                            <span class="avatar"
-                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                        </a>
-                                    </div> --}}
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-box-align-bottom text-secondary"></i>
-                                            Rexona Deodorant (rex-00399489)
+                            @foreach ($riwayatBarangMasuk as $row)
+                                <div class="list-group-item">
+                                    <div class="row align-items-center">
+
+                                        <div class="col text-truncate">
+                                            <a href="{{ route('barang-masuk.show', $row->barangMasuk->id) }}"
+                                                target="_blank"
+                                                class="text-reset text-secondary d-block">#{{ $row->barangMasuk->no_transaksi }}</a>
+                                            <div class="d-block  text-truncate">
+                                                <i class="ti ti-box-align-bottom text-secondary"></i>
+                                                {{ $row->barang->nama_barang }} ({{ $row->barang->kode }})
+                                            </div>
+                                            <div class="d-block  text-truncate"><i
+                                                    class="ti ti-transfer-in text-secondary"></i>
+                                                {{ $row->qty }}
+                                            </div>
+                                            <div class="d-block  text-truncate">
+                                                <i class="ti ti-calendar-due text-secondary"></i>
+                                                {{ \Carbon\Carbon::parse($row->barangMasuk->tgl_masuk)->format('d M Y') }}
+                                            </div>
                                         </div>
-                                        <div class="d-block  text-truncate"><i class="ti ti-transfer-in text-secondary"></i>
-                                            12 Box
+                                        <div class="col-auto">
+                                            <a href="#"
+                                                class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
+                                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path
+                                                        d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         </div>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-calendar-due text-secondary"></i>
-                                            12 Agustus 2024
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#"
-                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path
-                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
-                                                </path>
-                                            </svg>
-                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
-                                    <div class="col-auto">
-                                        <a href="#">
-                                            <span class="avatar"
-                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                        </a>
-                                    </div> --}}
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-box-align-bottom text-secondary"></i>
-                                            Rexona Deodorant (rex-00399489)
-                                        </div>
-                                        <div class="d-block  text-truncate"><i
-                                                class="ti ti-transfer-in text-secondary"></i>
-                                            12 Box
-                                        </div>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-calendar-due text-secondary"></i>
-                                            12 Agustus 2024
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#"
-                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path
-                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
-                                    <div class="col-auto">
-                                        <a href="#">
-                                            <span class="avatar"
-                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                        </a>
-                                    </div> --}}
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-box-align-bottom text-secondary"></i>
-                                            Rexona Deodorant (rex-00399489)
-                                        </div>
-                                        <div class="d-block  text-truncate"><i
-                                                class="ti ti-transfer-in text-secondary"></i>
-                                            12 Box
-                                        </div>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-calendar-due text-secondary"></i>
-                                            12 Agustus 2024
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#"
-                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path
-                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
 
                         </div>
                     </div>
@@ -286,126 +206,45 @@
                             <h3 class="card-title">Barang Keluar Terakhir</h3>
                         </div>
                         <div class="list-group list-group-flush list-group-hoverable">
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
-                                    <div class="col-auto">
-                                        <a href="#">
-                                            <span class="avatar"
-                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                        </a>
-                                    </div> --}}
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-box-align-bottom text-secondary"></i>
-                                            Rexona Deodorant (rex-00399489)
+                            @foreach ($riwayatBarangKeluar as $row)
+                                <div class="list-group-item">
+                                    <div class="row align-items-center">
+
+                                        <div class="col text-truncate">
+                                            <a href="{{ route('barang-keluar.show', $row->barangKeluar->id) }}"
+                                                target="_blank"
+                                                class="text-reset text-secondary d-block">#{{ $row->barangKeluar->no_transaksi }}</a>
+                                            <div class="d-block  text-truncate">
+                                                <i class="ti ti-box-align-bottom text-secondary"></i>
+                                                {{ $row->barang->nama_barang }} ({{ $row->barang->kode }})
+                                            </div>
+                                            <div class="d-block  text-truncate"><i
+                                                    class="ti ti-transfer-out text-secondary"></i>
+                                                {{ $row->qty }}
+                                            </div>
+                                            <div class="d-block  text-truncate">
+                                                <i class="ti ti-calendar-due text-secondary"></i>
+                                                {{ \Carbon\Carbon::parse($row->barangKeluar->tgl_keluar)->format('d M Y') }}
+                                            </div>
                                         </div>
-                                        <div class="d-block  text-truncate"><i
-                                                class="ti ti-transfer-out text-secondary"></i>
-                                            12 Box
+                                        <div class="col-auto">
+                                            <a href="#"
+                                                class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
+                                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path
+                                                        d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
+                                                    </path>
+                                                </svg>
+                                            </a>
                                         </div>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-calendar-due text-secondary"></i>
-                                            12 Agustus 2024
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#"
-                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path
-                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
-                                                </path>
-                                            </svg>
-                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
-                                    <div class="col-auto">
-                                        <a href="#">
-                                            <span class="avatar"
-                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                        </a>
-                                    </div> --}}
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-box-align-bottom text-secondary"></i>
-                                            Rexona Deodorant (rex-00399489)
-                                        </div>
-                                        <div class="d-block  text-truncate"><i
-                                                class="ti ti-transfer-in text-secondary"></i>
-                                            12 Box
-                                        </div>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-calendar-due text-secondary"></i>
-                                            12 Agustus 2024
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#"
-                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path
-                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    {{-- <div class="col-auto"><span class="badge bg-red"></span></div>
-                                    <div class="col-auto">
-                                        <a href="#">
-                                            <span class="avatar"
-                                                style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                        </a>
-                                    </div> --}}
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-reset text-secondary d-block">#BM-00199293</a>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-box-align-bottom text-secondary"></i>
-                                            Rexona Deodorant (rex-00399489)
-                                        </div>
-                                        <div class="d-block  text-truncate"><i
-                                                class="ti ti-transfer-in text-secondary"></i>
-                                            12 Box
-                                        </div>
-                                        <div class="d-block  text-truncate">
-                                            <i class="ti ti-calendar-due text-secondary"></i>
-                                            12 Agustus 2024
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#"
-                                            class="list-group-item-actions"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-secondary"
-                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path
-                                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
 
                         </div>
                     </div>
@@ -416,40 +255,32 @@
                             <h3 class="card-title">Stok Info</h3>
                         </div>
                         <div class="list-group list-group-flush">
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <i class="ti ti-info-circle icon text-warning"></i>
-                                    </div>
-
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-reset text-secondary d-block">Rexona Deodorant
-                                            (rex-00399489)</a>
-
-                                        <div class="d-block  text-truncate">
-                                            Sisa Stok : 5
+                            @foreach ($stokWarningInfo as $row)
+                                <div class="list-group-item">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            @if ($row->stok == 0)
+                                                <i class="ti ti-alert-triangle icon text-danger"></i>
+                                            @else
+                                                <i class="ti ti-info-circle icon text-warning"></i>
+                                            @endif
                                         </div>
-                                    </div>
 
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <i class="ti ti-alert-triangle icon text-danger"></i>
-                                    </div>
+                                        <div class="col text-truncate">
+                                            <a href="#"
+                                                class="text-reset text-secondary d-block">{{ $row->nama_barang }}
+                                                ({{ $row->kode }})
+                                            </a>
 
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-reset text-secondary text-truncate">Rexona
-                                            Deodorant
-                                            (rex-0039948922222222222)</a>
-
-                                        <div class="d-block  text-truncate">
-                                            Sisa Stok : 0
+                                            <div class="d-block  text-truncate">
+                                                Sisa Stok : {{ $row->stok }}
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
+
 
 
                         </div>
